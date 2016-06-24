@@ -86,6 +86,7 @@ class Terminal {
             });
 
             process.on('close', (code) => { 
+                this._outputChannel.appendLine('');
                 this.ExecuteCommand(commands, index+1);
             });
         }

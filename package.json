@@ -2,15 +2,32 @@
     "name": "terminal",
     "displayName": "Terminal",
     "description": "Terminal for Visual Studio Code",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "formulahendry",
     "icon": "images/logo.png",
     "engines": {
         "vscode": "^1.0.0"
     },
     "categories": [
-        "Other"
+        "Productivity",
+        "Other",
+        "Languages"
     ],
+    "keywords": [
+        "Terminal",
+        "Shell",
+        "Bash",
+        "CMD"
+    ],
+    "bugs": {
+        "url": "https://github.com/formulahendry/vscode-terminal/issues",
+        "email": "formulahendry@gmail.com"
+    },
+    "homepage": "https://github.com/formulahendry/vscode-terminal/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/formulahendry/vscode-terminal.git"      
+    },
     "activationEvents": [
         "onCommand:terminal.run"
     ],
