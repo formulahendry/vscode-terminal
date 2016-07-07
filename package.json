@@ -59,6 +59,9 @@
         "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
+    "dependencies": {
+        "tree-kill": "^1.1.0"
+    },
     "devDependencies": {
         "typescript": "^1.8.5",
         "vscode": "^0.11.0"
