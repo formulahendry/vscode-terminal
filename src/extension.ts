@@ -13,15 +13,16 @@ export function activate(context: vscode.ExtensionContext) {
 
     let terminal = new Terminal();
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('terminal.run', () => {
-        // The code you place here will be executed every time your command is executed        
+    let run = vscode.commands.registerCommand('terminal.run', () => {
         terminal.run();
     });
 
-    context.subscriptions.push(disposable);
+    let stop = vscode.commands.registerCommand('terminal.stop', () => {
+        terminal.stop();
+    });
+
+    context.subscriptions.push(run);
+    context.subscriptions.push(stop);
 }
 
 // this method is called when your extension is deactivated
@@ -32,21 +33,38 @@ export function deactivate() {
  * Terminal
  */
 class Terminal {
-    private _outputChannel;
+    private _outputChannel: vscode.OutputChannel;
+    private _isRunning: boolean;
+    private _process;
 
     constructor() {
         this._outputChannel = vscode.window.createOutputChannel('Terminal');
     }
 
-    public run() {       
+    public run(): void {
+        if (this._isRunning) {
+            vscode.window.showInformationMessage('Command(s) are already running!');
+            return;
+        }
+
         let commands = this.getCommands();
-        if (commands.length == 0)
-        {
+        if (commands.length == 0) {
             vscode.window.showInformationMessage('No commands found or selected.');
             return;
         }
 
+        this._isRunning = true;
         this.ExecuteCommands(commands);
+    }
+
+    public stop(): void {
+        if (this._isRunning) {
+            this._isRunning = false;
+            let kill = require('tree-kill');
+            kill(this._process.pid);
+            this._outputChannel.appendLine('');
+            this._outputChannel.appendLine('Command(s) stopped.');
+        }
     }
 
     private getCommands(): string[] {
@@ -72,22 +90,26 @@ class Terminal {
     }
 
     private ExecuteCommand(commands: string[], index: number) {
-        if (index < commands.length) {
+        if (index >= commands.length) {
+            this._isRunning = false;
+            return;
+        }
+        if (this._isRunning) {
             let exec = require('child_process').exec;
-            this._outputChannel.appendLine('>> ' +　commands[index]);
-            let process = exec(commands[index]);
+            this._outputChannel.appendLine('>> ' + commands[index]);
+            this._process = exec(commands[index]);
 
-            process.stdout.on('data', (data) => {               
+            this._process.stdout.on('data', (data) => {
                 this._outputChannel.append(data);
             });
 
-            process.stderr.on('data', (data) => {
+            this._process.stderr.on('data', (data) => {
                 this._outputChannel.append(data);
             });
 
-            process.on('close', (code) => { 
+            this._process.on('close', (code) => {
                 this._outputChannel.appendLine('');
-                this.ExecuteCommand(commands, index+1);
+                this.ExecuteCommand(commands, index + 1);
             });
         }
     }

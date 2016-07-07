@@ -2,7 +2,7 @@
     "name": "terminal",
     "displayName": "Terminal",
     "description": "Terminal for Visual Studio Code",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "formulahendry",
     "icon": "images/logo.png",
     "engines": {
@@ -33,14 +33,26 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
-        "commands": [{
-            "command": "terminal.run",
-            "title": "Run Terminal Command"
-        }],
-        "keybindings": [{
-            "command": "terminal.run",
-            "key": "ctrl+alt+r"
-        }]
+        "commands": [
+            {
+                "command": "terminal.run",
+                "title": "Run Terminal Command"
+            },
+            {
+                "command": "terminal.stop",
+                "title": "Stop Terminal Command"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "terminal.run",
+                "key": "ctrl+alt+r"
+            },
+            {
+                "command": "terminal.stop",
+                "key": "ctrl+alt+c"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
