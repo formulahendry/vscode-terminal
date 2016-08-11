@@ -2,6 +2,11 @@
 
 Run terminal command directly in Text Editor
 
+## Notice
+From v0.0.4, this extension will have limited updates for bug fix or feature development, because:
+1. I have another extension: [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner) which is superset of the Terminal extension since it not only supports `powershell, bat/cmd, bash/sh` but also supports other script language like `js, php, python, perl, ruby, go, lua, groovy, vbscript` even `F#, C#`. Moreover, this Code Runner extension has more functions (e.g. working directory support, output syntax highlight, run as a file instead of running a set of commands and so on) and will have more supports and updates in the future.
+2. VS Code already has basic built-in support for the terminal from v1.2 and add 'run selected text' in v1.3. Besides, the ability to run the entire text of current active text editor will come in v1.5. I have already sent the [Pull request](https://github.com/Microsoft/vscode/pull/9480) and it has been merged.
+
 ## Features
 
 * Run all the commands in Text Editor
@@ -17,6 +22,9 @@ Run terminal command directly in Text Editor
 ![Usage](images/usage.gif)
 
 ## Change Log
+### 0.0.4
+* Update the future of this extension
+
 ### 0.0.3
 * Add support to stop running commands
 

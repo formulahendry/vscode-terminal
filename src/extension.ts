@@ -39,6 +39,8 @@ class Terminal {
 
     constructor() {
         this._outputChannel = vscode.window.createOutputChannel('Terminal');
+        this._outputChannel.appendLine('[Notice] This extension will have limited updates in the future, try Code Runner: https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner with more functions and supports!');
+        this._outputChannel.appendLine('');
     }
 
     public run(): void {
@@ -85,7 +87,7 @@ class Terminal {
     }
 
     private ExecuteCommands(commands: string[]) {
-        this._outputChannel.show();
+        this._outputChannel.show(true);
         this.ExecuteCommand(commands, 0);
     }
 
