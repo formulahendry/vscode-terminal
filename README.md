@@ -23,7 +23,18 @@ From v0.0.4, this extension will have limited updates for bug fix or feature dev
 
 ![Usage](images/usage.gif)
 
+## Telemetry data
+By default, telemetry data collection is turned on. To disable it, update the settings.json as below:
+```json
+{
+    "terminal.enableAppInsights": false
+}
+```
+
 ## Change Log
+### 0.0.5
+* Add Application Insights to track telemetry data
+
 ### 0.0.4
 * Update the future of this extension
 

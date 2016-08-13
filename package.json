@@ -2,7 +2,7 @@
     "name": "terminal",
     "displayName": "Terminal",
     "description": "Terminal for Visual Studio Code",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publisher": "formulahendry",
     "icon": "images/logo.png",
     "engines": {
@@ -51,7 +51,18 @@
                 "command": "terminal.stop",
                 "key": "ctrl+alt+c"
             }
-        ]
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Terminal configuration",
+            "properties": {
+                "terminal.enableAppInsights": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable AppInsights to track user telemetry data."
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
@@ -59,7 +70,8 @@
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "dependencies": {
-        "tree-kill": "^1.1.0"
+        "tree-kill": "^1.1.0",
+        "applicationinsights": "^0.15.18"
     },
     "devDependencies": {
         "typescript": "^1.8.5",
