@@ -32,6 +32,9 @@ By default, telemetry data collection is turned on. To disable it, update the se
 ```
 
 ## Change Log
+### 0.0.6
+* Upgrade applicationinsights npm since [telemetry data requires HTTPS](https://azure.microsoft.com/en-us/updates/application-insights-telemetry-data-now-requires-https-with-shutdown-of-http-data-collectors/)
+
 ### 0.0.5
 * Add Application Insights to track telemetry data
 
