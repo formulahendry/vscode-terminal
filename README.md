@@ -15,6 +15,7 @@ From v0.0.4, this extension will have limited updates for bug fix or feature dev
 * Run the selected commands in Text Editor
 * Stop the running commands
 * View output in Output Window
+* Open Integrated Terminal at current file's directory
 
 ## Usages
 
@@ -22,6 +23,10 @@ From v0.0.4, this extension will have limited updates for bug fix or feature dev
 * To stop the running commands, use shortcut `Ctrl+Alt+C`, or press `F1` and then select/type `Stop Terminal Command`
 
 ![Usage](images/usage.gif)
+
+* To open Integrated Terminal at current file's directory, use shortcut `Ctrl+Alt+O`, or press `F1` and then select/type `Open in Integrated Terminal`, or right click in Text Editor/Explorer and then click `Open in Integrated Terminal` in context menu
+
+![Open](images/open.gif)
 
 ## Telemetry data
 By default, telemetry data collection is turned on. To disable it, update the settings.json as below:
@@ -32,6 +37,9 @@ By default, telemetry data collection is turned on. To disable it, update the se
 ```
 
 ## Change Log
+### 0.0.7
+* Add 'Open in Integrated Terminal' context menu
+
 ### 0.0.6
 * Upgrade applicationinsights npm since [telemetry data requires HTTPS](https://azure.microsoft.com/en-us/updates/application-insights-telemetry-data-now-requires-https-with-shutdown-of-http-data-collectors/)
 

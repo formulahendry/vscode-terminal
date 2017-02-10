@@ -2,11 +2,11 @@
   "name": "terminal",
   "displayName": "Terminal",
   "description": "Terminal for Visual Studio Code",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "publisher": "formulahendry",
   "icon": "images/logo.png",
   "engines": {
-    "vscode": "^1.0.0"
+    "vscode": "^1.6.0"
   },
   "categories": [
     "Other",
@@ -16,7 +16,8 @@
     "Terminal",
     "Shell",
     "Bash",
-    "CMD"
+    "CMD",
+    "powershell"
   ],
   "bugs": {
     "url": "https://github.com/formulahendry/vscode-terminal/issues",
@@ -28,7 +29,8 @@
     "url": "https://github.com/formulahendry/vscode-terminal.git"
   },
   "activationEvents": [
-    "onCommand:terminal.run"
+    "onCommand:terminal.run",
+    "onCommand:terminal.open"
   ],
   "main": "./out/src/extension",
   "contributes": {
@@ -40,6 +42,10 @@
       {
         "command": "terminal.stop",
         "title": "Stop Terminal Command"
+      },
+      {
+        "command": "terminal.open",
+        "title": "Open in Integrated Terminal"
       }
     ],
     "keybindings": [
@@ -50,8 +56,27 @@
       {
         "command": "terminal.stop",
         "key": "ctrl+alt+c"
+      },
+      {
+        "command": "terminal.open",
+        "key": "ctrl+alt+o"
       }
     ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "!inOutput",
+          "command": "terminal.open",
+          "group": "navigation@1"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "terminal.open",
+          "group": "navigation@1"
+        }
+      ]
+    },
     "configuration": {
       "type": "object",
       "title": "Terminal configuration",

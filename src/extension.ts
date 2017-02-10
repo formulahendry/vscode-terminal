@@ -2,6 +2,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as path from 'path';
 import { AppInsightsClient } from './appInsightsClient';
 
 // this method is called when your extension is activated
@@ -22,8 +23,13 @@ export function activate(context: vscode.ExtensionContext) {
         terminal.stop();
     });
 
+    let open = vscode.commands.registerCommand('terminal.open', (fileUri) => {
+        terminal.open(fileUri);
+    });
+
     context.subscriptions.push(run);
     context.subscriptions.push(stop);
+    context.subscriptions.push(open);
 }
 
 // this method is called when your extension is deactivated
@@ -71,6 +77,25 @@ class Terminal {
             kill(this._process.pid);
             this._outputChannel.appendLine('');
             this._outputChannel.appendLine('Command(s) stopped.');
+        }
+    }
+
+    public open(fileUri?: vscode.Uri): void {
+        let filePath: string;
+        if (!fileUri || typeof fileUri.fsPath !== 'string') {
+            let activeEditor = vscode.window.activeTextEditor;
+            if (activeEditor && !activeEditor.document.isUntitled) {
+                filePath = activeEditor.document.fileName;
+            }
+        } else {
+            filePath = fileUri.fsPath;
+        }
+
+        this._appInsightsClient.sendEvent("open");
+        let terminal = vscode.window.createTerminal();
+        terminal.show(false);
+        if (filePath) {
+            terminal.sendText(`cd "${path.dirname(filePath)}"`);
         }
     }
 
