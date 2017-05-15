@@ -16,6 +16,7 @@ From v0.0.4, this extension will have limited updates for bug fix or feature dev
 * Stop the running commands
 * View output in Output Window
 * Open Integrated Terminal at current file's directory
+* Quick way to toggle Integrated Terminal
 
 ## Usages
 
@@ -28,6 +29,10 @@ From v0.0.4, this extension will have limited updates for bug fix or feature dev
 
 ![Open](images/open.gif)
 
+* To toggle Integrated Terminal, use shortcut `Ctrl+Alt+T`, or click the `Terminal` icon in the Status Bar at the bottom
+
+![Toggle](images/toggle.png)
+
 ## Telemetry data
 By default, telemetry data collection is turned on. To disable it, update the settings.json as below:
 ```json
@@ -37,6 +42,9 @@ By default, telemetry data collection is turned on. To disable it, update the se
 ```
 
 ## Change Log
+### 0.0.8 (2017-05-15)
+* Quick way to toggle Integrated Terminal in the Status Bar
+
 ### 0.0.7
 * Add 'Open in Integrated Terminal' context menu
 

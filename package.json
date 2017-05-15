@@ -2,7 +2,7 @@
   "name": "terminal",
   "displayName": "Terminal",
   "description": "Terminal for Visual Studio Code",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "publisher": "formulahendry",
   "icon": "images/logo.png",
   "engines": {
@@ -29,8 +29,10 @@
     "url": "https://github.com/formulahendry/vscode-terminal.git"
   },
   "activationEvents": [
+    "*",
     "onCommand:terminal.run",
-    "onCommand:terminal.open"
+    "onCommand:terminal.open",
+    "onCommand:terminal.toggle"
   ],
   "main": "./out/src/extension",
   "contributes": {
@@ -46,6 +48,10 @@
       {
         "command": "terminal.open",
         "title": "Open in Integrated Terminal"
+      },
+      {
+        "command": "terminal.toggle",
+        "title": "Toggle Integrated Terminal"
       }
     ],
     "keybindings": [
@@ -60,6 +66,10 @@
       {
         "command": "terminal.open",
         "key": "ctrl+alt+o"
+      },
+      {
+        "command": "terminal.toggle",
+        "key": "ctrl+alt+t"
       }
     ],
     "menus": {

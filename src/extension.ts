@@ -27,9 +27,14 @@ export function activate(context: vscode.ExtensionContext) {
         terminal.open(fileUri);
     });
 
+    let toggle = vscode.commands.registerCommand('terminal.toggle', () => {
+        terminal.toggle();
+    });
+
     context.subscriptions.push(run);
     context.subscriptions.push(stop);
     context.subscriptions.push(open);
+    context.subscriptions.push(toggle);
 }
 
 // this method is called when your extension is deactivated
@@ -49,6 +54,7 @@ class Terminal {
         this._outputChannel = vscode.window.createOutputChannel('Terminal');
         this._outputChannel.appendLine('[Notice] This extension will have limited updates in the future, try Code Runner: https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner with more functions and supports!');
         this._outputChannel.appendLine('');
+        this.createStatusBarItem();
         this._appInsightsClient = new AppInsightsClient();
     }
 
@@ -99,6 +105,11 @@ class Terminal {
         }
     }
 
+    public toggle(): void {
+        vscode.commands.executeCommand("workbench.action.terminal.toggleTerminal");
+        this._appInsightsClient.sendEvent("toggle");
+    }
+
     private getCommands(): string[] {
         let editor = vscode.window.activeTextEditor;
         if (!editor) {
@@ -144,5 +155,13 @@ class Terminal {
                 this.ExecuteCommand(commands, index + 1);
             });
         }
+    }
+
+    private createStatusBarItem(): void {
+        let toggleTerminalStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+        toggleTerminalStatusBarItem.command = "terminal.toggle";
+        toggleTerminalStatusBarItem.text = " $(terminal) ";
+        toggleTerminalStatusBarItem.tooltip = "Toggle Integrated Terminal";
+        toggleTerminalStatusBarItem.show();
     }
 }
