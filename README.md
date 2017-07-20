@@ -42,6 +42,9 @@ By default, telemetry data collection is turned on. To disable it, update the se
 ```
 
 ## Change Log
+### 0.0.9 (2017-07-20)
+* [#9](https://github.com/formulahendry/vscode-terminal/issues/9): Open terminal for Bash on Windows
+
 ### 0.0.8 (2017-05-15)
 * Quick way to toggle Integrated Terminal in the Status Bar
 

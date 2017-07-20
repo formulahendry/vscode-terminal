@@ -2,6 +2,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as os from 'os';
 import * as path from 'path';
 import { AppInsightsClient } from './appInsightsClient';
 
@@ -100,6 +101,7 @@ class Terminal {
         this._appInsightsClient.sendEvent("open");
         let terminal = vscode.window.createTerminal();
         terminal.show(false);
+        filePath = this.getFilePathForBashOnWindows(filePath);
         if (filePath) {
             terminal.sendText(`cd "${path.dirname(filePath)}"`);
         }
@@ -163,5 +165,19 @@ class Terminal {
         toggleTerminalStatusBarItem.text = " $(terminal) ";
         toggleTerminalStatusBarItem.tooltip = "Toggle Integrated Terminal";
         toggleTerminalStatusBarItem.show();
+    }
+
+    private getFilePathForBashOnWindows(filePath: string): string {
+        if (os.platform() === 'win32') {
+            let windowsShell = vscode.workspace.getConfiguration('terminal').get<string>('integrated.shell.windows');
+            if (windowsShell && windowsShell.indexOf('bash') > -1 && windowsShell.indexOf('Windows') > -1) {
+                filePath = filePath.replace(/([A-Za-z]):\\/, this.replacer).replace(/\\/g, '/');
+            }
+        }
+        return filePath;
+    }
+
+    private replacer(match: string, p1: string): string {
+        return `/mnt/${p1.toLowerCase()}/`;
     }
 }
