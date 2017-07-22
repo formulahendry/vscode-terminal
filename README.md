@@ -42,6 +42,9 @@ By default, telemetry data collection is turned on. To disable it, update the se
 ```
 
 ## Change Log
+### 0.0.10 (2017-07-22)
+* [#10](https://github.com/formulahendry/vscode-terminal/issues/10): Handle case-insensitive bash path
+
 ### 0.0.9 (2017-07-20)
 * [#9](https://github.com/formulahendry/vscode-terminal/issues/9): Open terminal for Bash on Windows
 

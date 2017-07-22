@@ -170,7 +170,7 @@ class Terminal {
     private getFilePathForBashOnWindows(filePath: string): string {
         if (os.platform() === 'win32') {
             let windowsShell = vscode.workspace.getConfiguration('terminal').get<string>('integrated.shell.windows');
-            if (windowsShell && windowsShell.indexOf('bash') > -1 && windowsShell.indexOf('Windows') > -1) {
+            if (windowsShell && windowsShell.toLowerCase().indexOf('bash') > -1 && windowsShell.toLowerCase().indexOf('windows') > -1) {
                 filePath = filePath.replace(/([A-Za-z]):\\/, this.replacer).replace(/\\/g, '/');
             }
         }
